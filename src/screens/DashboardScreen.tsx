@@ -2,16 +2,33 @@ import React from "react";
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 
 const simulations = [
-    { id: "1", title: "Simulación de Phishing", description: "Detecta un correo malicioso." },
+    { id: "1", title: "Simulaciones", description: "Descubre todas las simulaciones disponibles." },
     { id: "2", title: "Contraseñas Seguras", description: "Evalúa la fortaleza de tus contraseñas."},
-    { id: "3", title: "Sitios web maliciosos", description: "Aprende a identificar páginas inseguras."}
+    { id: "3", title: "Sitios web maliciosos", description: "Aprende a identificar páginas inseguras."},
+    { id: "4", title: "Acerca del producto", description: "Más información sobre el producto" }
 ];
 
 const DashboardScreen = ({ navigation }: any) => {
     const renderSimulation = ({ item }: any) => (
         <TouchableOpacity
             style={styles.card}
-            onPress={() => navigation.navigate("Simulation", { simulationId: item.id })}
+            onPress={() => {
+              switch(item.id){
+                case "1":
+                  navigation.navigate("Simulation", { simulationId: item.id });
+                  break;
+                case "2":
+                  navigation.navigate("PasswordStrengthSimulationScreen");
+                  break;
+                case "3":
+                  navigation.navigate("WebsiteSimulationScreen");
+                  break;
+                case "4":
+                  navigation.navigate("AboutScreen");
+                  break;
+              }
+            }}
+            //onPress={() => navigation.navigate("Simulation", { simulationId: item.id })}
         >
             <Text style={styles.cardTitle}>{item.title}</Text>
             <Text style={styles.cardDescription}>{item.description}</Text>
